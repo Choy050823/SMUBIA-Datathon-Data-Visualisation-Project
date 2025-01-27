@@ -14,4 +14,4 @@ from collections import Counter
 
 all_keywords = [kw for sublist in cleaned_data["keywords"] for kw, _ in sublist]
 keyword_counts = Counter(all_keywords)
-print("Trending keywords:", keyword_counts.most_common(10))
+print("Trending keywords:", keyword_counts.most_common(20))
