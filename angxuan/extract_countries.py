@@ -3,10 +3,10 @@ import pycountry # pip install pycountry
 
 
 # import data (the first 400 data - category)
-news_df = pd.read_csv("news_categorize.csv")
-news_df = news_df[:400]
+news_df = pd.read_csv("。/angxuan/news_categorize.csv")
+news_df = news_df.head(1510)
 
-cleaned_data = pd.read_csv("./chloe/Cleaned_Tokenized_Data/cleaned_tokenized_data.csv")
+cleaned_data = pd.read_csv("./chloe/Cleaned_Tokenized_Data/cleaned_tokenized_data.csv").head(1510)
 first_400_cleaned_data = cleaned_data[:400]
 
 # extract countries function
