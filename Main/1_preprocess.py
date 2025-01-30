@@ -70,5 +70,5 @@ print("\nFirst few rows of the combined dataframe:")
 print(cleaned_combined_data.head())
 
 # Step 9: Save the cleaned data with the original text
-cleaned_combined_data.to_csv("./chloe/Cleaned_Tokenized_Data/cleaned_tokenized_data_with_original.csv", index=False)
+cleaned_combined_data.to_csv("./Main/Important_Data/1_cleaned_tokenized_data.csv", index=False)
 print("\nCleaned data with original text saved to 'cleaned_tokenized_data_with_original.csv'")

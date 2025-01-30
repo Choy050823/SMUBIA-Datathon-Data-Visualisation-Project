@@ -1,10 +1,8 @@
 import pandas as pd
 
-country = pd.read_csv("./angxuan/cleaned_data_with_countries.csv").drop(columns=["cleaned_summary","tokens","filtered_tokens"]).head(1510)
-summary = pd.read_csv("./minhan/text_summary.csv").drop(columns=["cleaned_summary"]).head(1510)
-print(country.head(20))
-
-themes = pd.read_csv("./angxuan/themes.csv")
+country = pd.read_csv("./Main/Important_Data/2_cleaned_data_with_countries.csv").drop(columns=["cleaned_summary","tokens","filtered_tokens"]).head(1510)
+themes = pd.read_csv("./Main/Important_Data/4_cleaned_themes.csv")
+summary = pd.read_csv("./Main/Important_Data/5_text_summary.csv").drop(columns=["cleaned_summary"]).head(1510)
 
 res = pd.DataFrame({
     "summary": summary["summary"],
@@ -12,7 +10,7 @@ res = pd.DataFrame({
     "countries": country["countries"],
     "lemmatized_tokens": country["lemmatized_tokens"]
 })
-# country["theme"] = themes["Theme"]
+
 print(res.head(20))
 print(res["theme"].isnull().sum())
 res.dropna(subset=["theme"], inplace=True)
@@ -25,4 +23,4 @@ res = res.replace('\n', ' ', regex=True)
 problematic_rows = res[res.apply(lambda row: row.str.contains('\n').any(), axis=1)]
 print(problematic_rows)
 
-res.to_csv("./angxuan/data_country_and_label.csv", index=False, quoting=2, escapechar='\\')
+res.to_csv("./Main/Important_Data/6_data_country_and_label.csv", index=False, quoting=2, escapechar='\\')
