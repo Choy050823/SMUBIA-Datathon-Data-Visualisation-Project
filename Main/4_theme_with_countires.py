@@ -25,4 +25,4 @@ res = res.replace('\n', ' ', regex=True)
 problematic_rows = res[res.apply(lambda row: row.str.contains('\n').any(), axis=1)]
 print(problematic_rows)
 
-res.to_csv("./angxuan/new_data_country_and_label.csv", index=False, quoting=2, escapechar='\\')
+res.to_csv("./angxuan/data_country_and_label.csv", index=False, quoting=2, escapechar='\\')
