@@ -1,13 +1,13 @@
 import pandas as pd
 
-country = pd.read_csv("./angxuan/cleaned_data_with_countries.csv").drop(columns=["cleaned_summary","tokens","filtered_tokens"]).head(1510)
-summary = pd.read_csv("./minhan/text_summary.csv").drop(columns=["cleaned_summary"]).head(1510)
+country = pd.read_csv("./angxuan/cleaned_data_with_countries.csv").drop(columns=["tokens","filtered_tokens"]).head(1510)
+# summary = pd.read_csv("./minhan/text_summary.csv").drop(columns=["cleaned_summary"]).head(1510)
 print(country.head(20))
 
 themes = pd.read_csv("./angxuan/themes.csv")
 
 res = pd.DataFrame({
-    "summary": summary["summary"],
+    "cleaned_summary": country["cleaned_summary"],
     "theme": themes["Theme"],
     "countries": country["countries"],
     "lemmatized_tokens": country["lemmatized_tokens"]
@@ -25,4 +25,4 @@ res = res.replace('\n', ' ', regex=True)
 problematic_rows = res[res.apply(lambda row: row.str.contains('\n').any(), axis=1)]
 print(problematic_rows)
 
-res.to_csv("./angxuan/new_data_country_and_label.csv", index=False, quoting=2, escapechar='\\')
+res.to_csv("./angxuan/big_summary_data_country_and_label.csv", index=False, quoting=2, escapechar='\\')
