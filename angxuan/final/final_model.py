@@ -4,18 +4,18 @@ import pandas as pd
 from nltk.tokenize import word_tokenize
 
 with open("word2vec_model.pkl", "rb") as f:
-    word2vec_model = pickle.load(f)
+    word2vec = pickle.load(f)
 
 with open("random_forest_classifier.pkl", "rb") as f:
     model = pickle.load(f)
 
 
-data = pd.read.csv("2_cleaned_data_with_countries.csv")
+data = pd.read_csv("2_cleaned_data_with_countries.csv")
 # generate document vectors
 def vectorize_doc(each_line):
     # remove out of vocab words
-    words = [word for word in each_line if word in word2vec_model.wv]
-    return np.mean(word2vec_model.wv[words], axis = 0) if words else np.zeros(word2vec_model.vector_size)
+    words = [word for word in each_line if word in word2vec.wv]
+    return np.mean(word2vec.wv[words], axis = 0) if words else np.zeros(word2vec.vector_size)
 
 # create feature vectors 
 data_x = np.array([vectorize_doc(word_tokenize(each_line.lower())) for each_line in data["cleaned_summary"]])
