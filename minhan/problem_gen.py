@@ -11,28 +11,45 @@ file_path = "./angxuan/big_summary_data_country_and_label.csv"  # Update with th
 df = pd.read_csv(file_path)
 
 # Step 2: Define the list of valid themes
-valid_themes = [
-    "Corporate and Business Topics", "Labor and Employment Issues", "Privacy, Security, and Cyber Matters", 
-    "Legal and Crime Stories", "Government Actions and Regulations", "Technology and Digital Trends", 
-    "Environment and Climate Topics", "Social Issues and Activism", "Healthcare and Medicine", 
-    "Community and Cultural Events", "International Relations and Trade", "Education and Learning", 
-    "Consumer Topics", "Infrastructure and Development", "Energy and Resources", "Political Topics and Protests", 
-    "Media and Communication", "Financial Policies and Taxation", "Human Rights and Social Justice", 
-    "Science, Research, and Innovation", "Disaster and Crisis Management", "Organized Crime and Trafficking", 
-    "Sports, Entertainment, and Leisure", "Other", "Military"
-]
+# valid_themes = [
+#     "Corporate and Business Topics", "Labor and Employment Issues", "Privacy, Security, and Cyber Matters", 
+#     "Legal and Crime Stories", "Government Actions and Regulations", "Technology and Digital Trends", 
+#     "Environment and Climate Topics", "Social Issues and Activism", "Healthcare and Medicine", 
+#     "Community and Cultural Events", "International Relations and Trade", "Education and Learning", 
+#     "Consumer Topics", "Infrastructure and Development", "Energy and Resources", "Political Topics and Protests", 
+#     "Media and Communication", "Financial Policies and Taxation", "Human Rights and Social Justice", 
+#     "Science, Research, and Innovation", "Disaster and Crisis Management", "Organized Crime and Trafficking", 
+#     "Sports, Entertainment, and Leisure", "Other", "Military"
+# ]
 
 # Step 3: Separate Multiple Themes into Individual Rows
 def separate_themes(df):
     expanded_rows = []
+    
+    # Define the correct mapping to preserve multi-word themes
+    theme_mappings = {
+        "Privacy, Security, and Cyber Matters": "Privacy_Security_Cyber_Matters",
+        "Science, Research, and Innovation": "Science_Research_and_Innovation",
+        "Sports, Entertainment, and Leisure": "Sports_Entertainment_and_Leisure",
+        # Add other themes if needed
+    }
+    
     for _, row in df.iterrows():
-        themes = row['theme'].split(', ')  # Split by comma and space
+        themes = row['theme']
+
+        # Replace full multi-word themes with underscored versions
+        for full_theme, mapped_theme in theme_mappings.items():
+            themes = themes.replace(full_theme, mapped_theme)
+
+        themes = themes.split(', ')  # Now safely split the themes
+
         for theme in themes:
             theme = theme.strip()
             expanded_rows.append({
-                'theme': theme,
-                'lemmatized_tokens': row['lemmatized_tokens']
+                'theme': theme,  # Ensure no extra spaces
+                'lemmatized_tokens': row['lemmatized_tokens']  # Keep lemmatized tokens for all themes
             })
+    
     return pd.DataFrame(expanded_rows)
 
 df_expanded = separate_themes(df)
@@ -63,7 +80,6 @@ hdbscan_model = HDBSCAN(
     cluster_selection_method='eom',  
     prediction_data=True  # ✅ Enables prediction data storage
 )
-
 
 # BERTopic Model with optimized parameters
 bertopic = BERTopic(
