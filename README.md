@@ -1,6 +1,9 @@
-# Data Visualization Project
+# SMUBIA Datathon Data Visualization Project
 
 This project involves processing, cleaning, and visualizing data from multiple sources, including news excerpts and Wikileaks data. The goal is to extract meaningful insights by categorizing the data, summarizing it, and identifying relevant countries and themes.
+
+![image](https://github.com/user-attachments/assets/b8bff949-1c8e-483d-b35e-5062520167ea)
+
 
 ## Project Structure
 
