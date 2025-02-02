@@ -3,6 +3,10 @@
 This project involves processing, cleaning, and visualizing data from multiple sources, including news excerpts and Wikileaks data. The goal is to extract meaningful insights by categorizing the data, summarizing it, and identifying relevant countries and themes.
 
 ![image](https://github.com/user-attachments/assets/b8bff949-1c8e-483d-b35e-5062520167ea)
+![image](https://github.com/user-attachments/assets/0e18fe44-cbba-408e-a185-a18457b72cac)
+![image](https://github.com/user-attachments/assets/c3cf6a30-f490-4213-b077-26640e3d0837)
+![image](https://github.com/user-attachments/assets/a2813b09-2877-48a5-8919-acc0414c4752)
+
 
 
 ## Project Structure
