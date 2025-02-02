@@ -1,10 +1,10 @@
-# SMUBIA Datathon Data Visualization Project
+# Data Visualization Project
 
 This project involves processing, cleaning, and visualizing data from multiple sources, including news excerpts and Wikileaks data. The goal is to extract meaningful insights by categorizing the data, summarizing it, and identifying relevant countries and themes.
 
 ## Project Structure
 
-The project is organized into several Python scripts, each responsible for a specific task in the data processing pipeline. Below is an overview of the files and their purposes:
+The project is organized into several Python scripts and Jupyter notebooks, each responsible for a specific task in the data processing pipeline. Below is an overview of the files and their purposes:
 
 ### Files
 
@@ -52,6 +52,21 @@ The project is organized into several Python scripts, each responsible for a spe
      - Removes rows with missing themes.
      - Saves the final combined data to a CSV file for visualization.
 
+7. **`7_feature_extraction_and_model_selection.ipynb`**
+   - **Purpose**: Performs feature extraction and model selection for text classification.
+   - **Tasks**:
+     - Uses **Word2Vec** and **TF-IDF** for feature extraction.
+     - Tests multiple models, including **Random Forest**, **Logistic Regression (One vs All)**, and **Support Vector Machine (SVM)**.
+     - Evaluates model performance using metrics like precision, recall, F1-score, Hamming loss, and accuracy.
+     - Saves the best-performing model (Random Forest) for further use.
+
+8. **`8_final_model.ipynb`**
+   - **Purpose**: Loads the trained model and performs predictions on the cleaned data.
+   - **Tasks**:
+     - Loads the pre-trained **TF-IDF vectorizer** and **Random Forest model**.
+     - Preprocesses the input data for prediction.
+     - Predicts themes for the cleaned data and saves the results to a CSV file.
+
 ## Data Flow
 
 1. **Preprocessing**: Raw data is cleaned, tokenized, and lemmatized.
@@ -60,6 +75,8 @@ The project is organized into several Python scripts, each responsible for a spe
 4. **Theme Extraction**: Themes are cleaned and their distribution is analyzed.
 5. **Summarization**: Text is summarized using the BART model.
 6. **Combination**: Summarized text, themes, and country information are combined for visualization.
+7. **Feature Extraction & Model Selection**: Features are extracted using Word2Vec and TF-IDF, and the best model is selected.
+8. **Final Model Prediction**: The final model is used to predict themes for the cleaned data.
 
 ## Requirements
 
@@ -72,8 +89,12 @@ To run the scripts, you will need the following Python libraries:
 - `spacy`
 - `tqdm`
 - `anthropic` (for Claude API)
+- `scikit-learn`
+- `gensim`
+- `pickle`
 
 You can install the required libraries using the following command:
 
 ```bash
-pip install pandas nltk pycountry transformers spacy tqdm anthropic
+pip install pandas nltk pycountry transformers spacy tqdm anthropic scikit-learn gensim
+```
